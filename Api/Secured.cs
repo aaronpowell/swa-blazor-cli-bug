@@ -37,7 +37,7 @@ namespace BlazorApp.Api
             string responseMessage = (isClaimValid, string.IsNullOrEmpty(name)) switch
             {
                 (true, true) => "Request secured but didn't get your name",
-                (true, false) => $"Hey {name}, you made a secured request",
+                (true, false) => $"Hey {name}, you made a secured request (in principal). IsInRole says: {principal.IsInRole("authenticated")}",
                 (false, false) => $"This isn't very secure, is it {name}",
                 _ => "Don't know who you are, but you're not secure"
             };

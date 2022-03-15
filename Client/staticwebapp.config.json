@@ -1,5 +1,12 @@
 {
-    "navigationFallback": {
-        "rewrite": "/index.html"
+  "navigationFallback": {
+    "rewrite": "/index.html"
+  },
+  "routes": [
+    {
+      "route": "/api/secured/*",
+      "methods": [ "GET" ],
+      "allowedRoles": [ "authenticated" ]
     }
+  ]
 }
