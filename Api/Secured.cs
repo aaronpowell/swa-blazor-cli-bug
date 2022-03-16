@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using System.Linq;
 
 namespace BlazorApp.Api
 {
@@ -37,7 +38,7 @@ namespace BlazorApp.Api
             string responseMessage = (isClaimValid, string.IsNullOrEmpty(name)) switch
             {
                 (true, true) => "Request secured but didn't get your name",
-                (true, false) => $"Hey {name}, you made a secured request (in principal). IsInRole says: {principal.IsInRole("authenticated")}",
+                (true, false) => $"Hey {name}, you made a secured request (in principal). IsInRole says: {principal.IsInRole("authenticated")}. {principal.Claims.Select(claim => $"Claim: {claim.Subject} - {claim.Value}\r\n")}",
                 (false, false) => $"This isn't very secure, is it {name}",
                 _ => "Don't know who you are, but you're not secure"
             };
